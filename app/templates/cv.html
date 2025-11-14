@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ resume.name }} — {{ resume.role }}</title>
+  <meta name="description" content="Резюме {{ resume.role }}" />
+  <link rel="stylesheet" href="/static/css/cv.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <div class="title">
+        <div class="name">{{ resume.name }}</div>
+        <div class="role">{{ resume.role }}</div>
+        <p class="summary">{{ resume.summary }}</p>
+      </div>
+      {% if resume.avatar %}
+      <img class="avatar" alt="Фото" src="{{ resume.avatar }}" />
+      {% endif %}
+    </header>
+
+    <div class="grid">
+      {%- from "_icons.html" import email_icon, phone_icon, location_icon, github_icon, telegram_icon, website_icon %}
+      <!-- Левая колонка -->
+      <main class="left">
+
+        <!-- Опыт работы -->
+        {% if resume.experience %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Опыт работы</h2>
+            <span class="hint">Стажировки и практики</span>
+          </div>
+          <div class="timeline">
+            {% for job in resume.experience %}
+            <div class="tl-item">
+              <div class="item-header">
+                <div class="item-title">{{ job.title }}</div>
+                <div class="item-meta">{{ job.company }}, {{ job.period }} · {{ job.location }}</div>
+                {% if job.company_link %}
+                <div class="item-links">
+                  <span class="tag"><a href="{{ job.company_link }}">{{ job.company }}</a></span>
+                </div>
+                {% endif %}
+              </div>
+              <p class="item-desc">{{ job.description }}</p>
+              <ul class="item-list">
+                {% for achievement in job.achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        <!-- Pet проекты -->
+        {% if resume.projects %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Pet проекты</h2>
+          </div>
+          <div class="timeline">
+            {% for project in resume.projects %}
+            <div class="tl-item">
+              <div class="item-header">
+                <div class="item-title">{{ project.title }}</div>
+                <div class="item-meta">{{ project.period }}</div>
+                <div class="item-links">
+                  {% if project.github_link %}
+                  <a href="{{ project.github_link }}" aria-label="GitHub">GitHub</a>
+                  {% endif %}
+                  {% if project.demo_link %}
+                  <a href="{{ project.demo_link }}" aria-label="Демо">Демо</a>
+                  {% endif %}
+                  {% if project.docs_link %}
+                  <a href="{{ project.docs_link }}" aria-label="Документация">Docs</a>
+                  {% endif %}
+                </div>
+              </div>
+              <p class="item-desc">{{ project.description }}</p>
+              {% if project.achievements %}
+              <ul class="item-list">
+                {% for achievement in project.achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% if project.technologies %}
+              <div class="item-stack">
+                <span class="tag">Стек</span>
+                <div class="chips">
+                  {% for tech in project.technologies %}
+                  <span class="chip">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        <!-- Образование -->
+        {% if resume.education %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Образование</h2>
+            <span class="hint">дипломы, курсы, сертификаты</span>
+          </div>
+          <div class="timeline">
+            {% for edu in resume.education %}
+            <div class="tl-item">
+              <div class="item-header">
+                <div class="item-title">{{ edu.degree }}</div>
+                <div class="item-meta">{{ edu.institution }}, {{ edu.period }}</div>
+                {% if edu.certificate_link %}
+                <div class="item-links">
+                  <a href="{{ edu.certificate_link }}" aria-label="Сертификат">Сертификат</a>
+                </div>
+                {% endif %}
+              </div>
+              {% if edu.description %}
+              <p class="item-desc">{{ edu.description }}</p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+      </main>
+
+      <!-- Правая колонка -->
+      <aside class="right">
+        <!-- Контакты -->
+        <section class="section card">
+          <div class="section-header">
+            <h2>Контакты</h2>
+          </div>
+          <div class="contacts">
+            <div class="contact">
+              {{ email_icon() }}
+              <div><a href="mailto:{{ resume.contacts.email }}">{{ resume.contacts.email }}</a></div>
+            </div>
+
+            <div class="contact">
+              {{ phone_icon() }}
+              <div><a href="tel:{{ resume.contacts.phone }}">{{ resume.contacts.phone }}</a></div>
+            </div>
+
+            <div class="contact">
+              {{ location_icon() }}
+              <div class="location">{{ resume.contacts.location }}</div>
+            </div>
+
+            <div class="contact">
+              {{ github_icon() }}
+              <div><a href="https://github.com/{{ resume.contacts.github }}" target="_blank" rel="noreferrer">github.com/{{ resume.contacts.github }}</a></div>
+            </div>
+
+            <div class="contact">
+              {{ telegram_icon() }}
+              <div><a href="https://t.me/{{ resume.contacts.telegram }}" target="_blank" rel="noreferrer">@{{ resume.contacts.telegram }}</a></div>
+            </div>
+
+            {% if resume.contacts.website %}
+            <div class="contact">
+              {{ website_icon() }}
+              <div><a href="{{ resume.contacts.website }}" target="_blank" rel="noreferrer">{{ resume.contacts.website }}</a></div>
+            </div>
+            {% endif %}
+          </div>
+        </section>
+
+        <!-- Навыки -->
+        {% if resume.skills %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Ключевые навыки</h2>
+          </div>
+
+          {% for category, skills in resume.skills.items() %}
+          <div class="skill-category">
+            <span class="tag">{{ category }}</span>
+            <div class="chips">
+              {% for skill in skills %}
+              <span class="chip">{{ skill }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </section>
+        {% endif %}
+
+        <!-- Достижения -->
+        {% if resume.achievements %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Достижения</h2>
+          </div>
+          <ul>
+            {% for achievement in resume.achievements %}
+            <li>{{ achievement }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+        <!-- Языки -->
+        {% if resume.languages %}
+        <section class="section card">
+          <div class="section-header">
+            <h2>Языки</h2>
+          </div>
+          <ul>
+            {% for language in resume.languages %}
+            <li>{{ language }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- <script src="/static/js/resume.js"></script> -->
+</body>
+</html>

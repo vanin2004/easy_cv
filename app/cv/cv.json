@@ -1,0 +1,79 @@
+{
+  "name": "Ванин Иван Тимофеевич",
+  "role": "Python-разработчик",
+  "summary": "Разрабатываю веб-приложения на FastAPI",
+  "contacts": {
+    "email": "mail@mail.ru",
+    "phone": "+7 (999) 123-45-67",
+    "location": "Москва",
+    "github": "ivan-ivanov",
+    "telegram": "ivan_dev",
+    "website": "https://ivan.dev"
+  },
+  "experience": [
+    {
+      "title": "Backend-разработчик",
+      "company": "GitHub",
+      "period": "янв 2021 — настоящее время",
+      "location": "Москва",
+      "company_link": "https://github.com",
+      "description": "Разработка REST/GraphQL сервисов, масштабирование микросервисов, участие в архитектуре.",
+      "achievements": [
+        "Перевёл монолитет на микросервисы — уменьшил время деплоя",
+        "Внедрил мониторинг и алертинг, уменьшил время отклика инцидентов"
+      ]
+    },
+    {
+      "title": "Стажёр Python-разработчик",
+      "company": "Yandex",
+      "period": "июнь 2019 — дек 2020",
+      "location": "Москва",
+      "company_link": "https://yandex.ru",
+      "description": "Разработка внутренних инструментов и API, участие в CI/CD.",
+      "achievements": [
+        "Автоматизировал сборку отчётов, сократив ручную работу на 4 часа в неделю"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "easy-cv",
+      "period": "2025",
+      "description": "Генератор резюме на FastAPI + Jinja2.",
+      "achievements": ["Публичный репозиторий и документация"],
+      "technologies": ["Python", "FastAPI", "Jinja2", "Docker"],
+      "github_link": "https://github.com/ivan-ivanov/easy-cv",
+      "demo_link": "",
+      "docs_link": ""
+    },
+    {
+      "title": "pipeline",
+      "period": "2021",
+      "description": "Конвейер для обучения и деплоя.",
+      "achievements": ["Сократил время обучения модели на 30%"],
+      "technologies": ["Python", "scikit-learn", "MLFlow", "Docker"],
+      "github_link": "https://github.com/ivan-ivanov/pipeline",
+      "demo_link": "",
+      "docs_link": ""
+    }
+  ],
+  "education": [
+    {
+      "degree": "Бакалавр",
+      "institution": "Московский государственный университет",
+      "period": "2023-2027",
+      "certificate_link": "",
+      "description": "Программный инженер"
+    }
+  ],
+  "skills": {
+    "Языки программирования": ["Python", "SQL"],
+    "Фреймворки": ["FastAPI", "Django"],
+    "Инструменты": ["Docker", "Git", "Linux"]
+  },
+  "achievements": [
+    "Победитель хакатона DevFest 2020",
+    "хороший человек"
+  ],
+  "languages": ["Русский — родной", "Английский — B2"]
+}
